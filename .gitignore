@@ -1,0 +1,19 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Node
+node_modules/
+
+# Misc
+*.doc
+*.docx
+.env
+.DS_Store
+.dart_tool/
+build/
+Thumbs.db
+
+# VS Code
+.vscode/

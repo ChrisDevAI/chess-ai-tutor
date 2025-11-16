@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\duali\Desktop\ChessAIApp\chessfrontend\build\windows\x64\CMakeFiles\b695eed836ce09c04c7b1ddf894f9365\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{047918E2-73F2-3E37-B748-1AC688168EAA}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

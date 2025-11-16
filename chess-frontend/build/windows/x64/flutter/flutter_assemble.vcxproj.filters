@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\duali\Desktop\ChessAIApp\chessfrontend\build\windows\x64\CMakeFiles\3a81c5fc7916f30169cf7e7aaa9057ef\flutter_windows.dll.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\duali\Desktop\ChessAIApp\chessfrontend\build\windows\x64\CMakeFiles\fa7a695f073e0057f37d3fbe63b53833\flutter_assemble.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\duali\Desktop\ChessAIApp\chessfrontend\windows\flutter\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\duali\Desktop\ChessAIApp\chessfrontend\build\windows\x64\flutter\CMakeFiles\flutter_assemble" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{047918E2-73F2-3E37-B748-1AC688168EAA}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
