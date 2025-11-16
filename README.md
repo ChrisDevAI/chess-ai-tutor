@@ -160,8 +160,7 @@ Flutter will open the UI automatically on the selected device.
 ---
 
 # Current Version (Polished UI)
-> **Insert screenshot here:**  
-> ![Current UI](screenshots/current-1.jpg)
+> ![Current UI](screenshots/current-0.jpg)
 
 The polished interface includes:
 
@@ -177,7 +176,6 @@ The polished interface includes:
 # 🖼 UI Evolution (Before → After)
 
 ## Early Version (Prototype)
-> **Insert screenshot here:**  
 > ![Early UI](screenshots/early-1.jpg)
 
 The initial prototype showed:
@@ -190,16 +188,28 @@ The initial prototype showed:
 
 Functional, but visually rough.
 
+
+## Mid Version (Prototype)
+> ![Current UI](screenshots/current-1.jpg)
+> 
+This improved mid-stage version introduced:
+
+- Better spacing and alignment
+- More consistent color choices
+- Early move list structuring
+- Experimental layout decisions
+
+Cleaner than the prototype, but still not fully polished.
+
+
 ---
 
 # 🛠 Development Journey (Iteration Process)
 
 A key strength of this project is the visible evolution from prototype to polished MVP.
 
----
 
 ## 1. Early Prototype (Functional but unpolished)
-> **Insert screenshot here:**  
 > ![Prototype Move List](screenshots/prototype-move-1.jpg)
 
 Issues included:
@@ -212,9 +222,7 @@ Issues included:
 ---
 
 ## 2. Mid-Development Issues (Debugging Phase)
-> **Insert screenshot here:**  
 > ![Broken Move List](screenshots/mid-broken-1.jpg)
-> **Insert second debugging screenshot:**  
 > ![Another Broken State](screenshots/mid-broken-2.jpg)
 
 These snapshots show:
