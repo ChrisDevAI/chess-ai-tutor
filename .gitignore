@@ -12,7 +12,6 @@ node_modules/
 .env
 .DS_Store
 .dart_tool/
-build/
 Thumbs.db
 
 # VS Code
