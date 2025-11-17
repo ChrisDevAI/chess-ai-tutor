@@ -1,0 +1,2 @@
+# Ignore Stockfish when GitHub is detecting languages
+stockfish/** linguist-vendored
