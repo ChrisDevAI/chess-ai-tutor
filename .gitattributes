@@ -1,5 +1,5 @@
-# Ignore Stockfish C++ engine for language statistics
-chess-backend/engines/stockfish/** linguist-vendored
+# Disable detection for all files by default
+* linguist-detectable=false
 
-# Ignore Flutter web build output for language statistics
-chess-frontend/build/** linguist-vendored
+# Enable detection ONLY for Python source files
+*.py linguist-detectable=true
