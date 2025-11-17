@@ -1,5 +1,5 @@
-# Ignore Stockfish C++ engine for language detection
-chess-backend/stockfish/** linguist-vendored
+# Ignore Stockfish C++ engine for language statistics
+chess-backend/engines/stockfish/** linguist-vendored
 
-# Ignore Flutter web build output for language detection
+# Ignore Flutter web build output for language statistics
 chess-frontend/build/** linguist-vendored
