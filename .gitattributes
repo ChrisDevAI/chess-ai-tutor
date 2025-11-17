@@ -1,2 +1,5 @@
-# Ignore Stockfish when GitHub is detecting languages
+# Ignore Stockfish for language detection
 stockfish/** linguist-vendored
+
+# Ignore Flutter web build output for language detection
+chess-frontend/build/** linguist-vendored
