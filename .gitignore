@@ -1,19 +1,43 @@
-# Python
-venv/
+# ============================================
+# GLOBAL PYTHON
+# ============================================
 __pycache__/
-*.pyc
+*.py[cod]
+*.pyo
+*.pyd
+*.swp
+*.swo
+*.bak
 
-# Node
-node_modules/
-
-# Misc
-*.doc
-*.docx
+# Virtual environments
+venv/
 .env
+.env.*
+
+# ============================================
+# GLOBAL NODE / FRONTEND
+# ============================================
+node_modules/
+dist/
+build/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ============================================
+# SYSTEM FILES
+# ============================================
 .DS_Store
-.dart_tool/
 Thumbs.db
 
-# VS Code
+# ============================================
+# IDE FILES
+# ============================================
 .vscode/
-.vercel
+.idea/
+
+# ============================================
+# DEPLOY / PLATFORM-SPECIFIC
+# ============================================
+.vercel/
+.firebase/
