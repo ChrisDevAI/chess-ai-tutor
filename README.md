@@ -1,63 +1,75 @@
-# 📘 Chess AI Tutor — MVP
-A multi-component AI system combining **Stockfish + AI** with a custom Flutter front-end interface.
+# 📘 Chess AI Tutor — React + FastAPI AI Chess Analysis Tool
 
-This project demonstrates a working prototype of a hybrid chess analysis tool where a deterministic chess engine evaluates positions and a language model provides natural language explanations. The result is an interactive position explainer with a clean UI, move navigation, and contextual tutoring.
+![Chess AI Tutor — Hero Screenshot](screenshots/Hero.jpg)
 
-This is an **MVP**, intentionally scoped to show **system architecture, AI integration, and full-stack engineering**, not to compete with full commercial chess engines.
+A hybrid AI chess analysis system combining **React + Vite + Tailwind**, **FastAPI**, **Stockfish**, and an **LLM-based coach** into a clean, modern, snapshot-based tutor interface.
 
----
-
-## 🌐 Live Demo (Frontend Only)
-
-**UI Preview (Vercel link):**  
-> _This deployment includes only the frontend to demonstrate the interface._  
-> _The backend (FastAPI + Stockfish + AI) runs locally and is not deployed._
+This MVP demonstrates full-stack engineering, deterministic engine analysis, and natural-language move explanations presented through a custom-built React interface.
 
 ---
 
-## 🧠 System Architecture
+## 🧠 Project Summary
 
-### High-Level Flow
+Chess AI Tutor is a two-part system:
+
+• A **React** front end for visualizing positions, navigating moves, and interacting with the AI coach  
+• A **FastAPI** backend orchestrating **Stockfish** and an **LLM** to produce structured, natural language coaching
+
+Originally prototyped in Flutter, the project was fully **rewritten in React** to improve deployment control, UI behavior, maintainability, and ecosystem support. The rewrite included UI cleanup, improved move list logic, complete layout restructuring, and a safer, more predictable coaching endpoint.
+
+This is an MVP built to showcase **architecture, integration, and engineering clarity**, not to replace full commercial chess engines.
+
+---
+
+## 🎯 Features
+
+### Engine + AI Integration
+• Snapshot-based position analysis  
+• Best-move evaluation  
+• LLM-generated explanations  
+• Structured “Coach” endpoint  
+
+### UI / Interaction
+• Clean two-panel React layout  
+• Scrollable move list  
+• Gold-accented navigation controls  
+• Chat-style analysis  
+• Tailwind dark theme  
+
+### Architecture Benefits
+• Predictable Vite build  
+• Clean separation of logic  
+• Local Stockfish evaluation  
+
+---
+
+## 🏗 System Architecture
+
 ```
-Frontend (Flutter) →
-    FastAPI Backend →
-        Stockfish Engine →
-        AI Language Model →
-    Frontend UI
+React (Vite + Tailwind)
+        ↓
+    FastAPI Backend
+        ↓
+   ┌───────────────┐
+   │  Stockfish     │
+   └───────────────┘
+        ↓
+   ┌───────────────┐
+   │   LLM Coach    │
+   └───────────────┘
+        ↓
+    React UI Panels
 ```
 
-### Components
-- **Frontend (Flutter):** Chessboard, move list, explanation panel, navigation buttons  
-- **Backend (FastAPI):** Stockfish orchestration + AI prompts  
-- **Stockfish Engine:** Local deterministic chess analysis  
-- **OpenAI Model:** Converts engine output into human-readable guidance  
-
-This structure cleanly separates calculation, explanation, and presentation.
-
 ---
 
-## 🎯 Features (MVP)
+## 🔧 Technical Stack
 
-- ✔ **Position Snapshot Analysis**  
-- ✔ **AI-Generated Explanations**  
-- ✔ **Interactive Chessboard**  
-- ✔ **Move Navigation (Start / Prev / Next / End)**  
-- ✔ **Scrollable Move List**  
-- ✔ **Chat-Style Explanation Panel**  
-- ✔ **Structured, Two-Column UI Layout**
-
----
-
-## ⚠ MVP Status & Limitations
-
-This prototype focuses on architecture and integration. Current constraints include:
-
-- Backend is **local-only**  
-- AI explanations vary with prompt behavior  
-- No PGN import/export UI yet  
-- Limited move validation  
-- No evaluation bar or centipawn graph  
-- Stockfish runs with lightweight settings for portability
+**Languages:** Python, JavaScript (React)
+**Frontend:** React, Vite, Tailwind CSS, react-chessboard  
+**Backend:** FastAPI, Uvicorn, Pydantic, python-chess, Stockfish (local chess engine)  
+**AI:** OpenAI API GPT Models  
+**Tools:** Git, GitHub, VS Code, Node/npm, Python
 
 ---
 
@@ -66,209 +78,119 @@ This prototype focuses on architecture and integration. Current constraints incl
 ```
 chess-ai-app/
 │
-├── chess-frontend/       # Flutter UI
+├── chess-frontend/       # React (Vite + Tailwind)
 ├── chess-backend/        # FastAPI backend (Stockfish + AI)
-├── screenshots/          # UI images
+├── screenshots/          # UI development journey
 │
-├── README.md
-└── .gitignore
+└── README.md
 ```
 
 ---
 
-# 🚀 Running the Full System Locally
+## 🚀 Running the Full System Locally
 
-This project contains two components:
+### 1. Clone
 
-1. **Backend:** FastAPI + Stockfish + OpenAI  
-2. **Frontend:** Flutter UI  
-
-Both must run locally for the full MVP.
-
----
-
-### 1. Clone the Repository
-
-```bash
+```
 git clone https://github.com/ChrisDevAI/chess-ai-app.git
 cd chess-ai-app
 ```
 
 ---
 
-### 2. Backend Setup (FastAPI + Stockfish)
+### 2. Backend Setup
 
-```bash
+```
 cd chess-backend
 python -m venv venv
 venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-Create a `.env` file in the backend folder:
+Rename `.env.example` to `.env`, and add your OpenAPI API Key:
 
-```env
+```
 OPENAI_API_KEY=your_key_here
 ```
 
-Run the backend with Uvicorn:
+Run backend:
 
-```bash
+```
 uvicorn main:app --reload --port 8000
 ```
 
-Backend will run at:
+---
+
+### 3. Frontend Setup
 
 ```
-http://localhost:8000
-```
-
-Swagger API docs:
-
-```
-http://localhost:8000/docs
+cd ../chess-frontend
+npm install
+npm run dev
 ```
 
 ---
 
-### 3. Frontend Setup (Flutter)
+# 🛠 Development Journey (Full Evolution)
 
-```bash
-cd chess-frontend
-flutter pub get
-```
-
-Run the UI:
-
-**Web (Chrome):**
-```bash
-flutter run -d chrome
-```
-
-**Windows Desktop:**
-```bash
-flutter run -d windows
-```
-
-**Android (optional):**
-```bash
-flutter run -d android
-```
-
-Flutter will open the UI automatically on the selected device.
+## Early Prototype written in Flutter
+![Early UI](screenshots/early-1.jpg)
 
 ---
 
-# Current Version (Polished UI)
-> ![Current UI](screenshots/current-0.jpg)
-
-The polished interface includes:
-
-- A dark theme  
-- Clear panel separation  
-- Two-column move list  
-- Gold-accented navigation buttons  
-- Clean spacing and improved readability  
-- Modern chess application layout  
+## Early Move List Issues
+![Prototype Move List](screenshots/prototype-move-1.jpg)
 
 ---
 
-# 🖼 UI Evolution (Before → After)
-
-## Early Version (Prototype)
-> ![Early UI](screenshots/early-1.jpg)
-
-The initial prototype showed:
-
-- Flat, washed-out color palette  
-- Weak visual hierarchy  
-- Broken move list  
-- Inconsistent spacing  
-- No UI structure  
-
-Functional, but visually rough.
-
-
-## Mid Version (Prototype)
-> ![Current UI](screenshots/current-1.jpg)
-> 
-This improved mid-stage version introduced:
-
-- Better spacing and alignment
-- More consistent color choices
-- Early move list structuring
-- Experimental layout decisions
-
-Cleaner than the prototype, but still not fully polished.
-
+## Mid-Development Bugs
+![Broken Move List](screenshots/mid-broken-1.jpg)
+![Another Broken State](screenshots/mid-broken-2.jpg)
 
 ---
 
-# 🛠 Development Journey (Iteration Process)
-
-A key strength of this project is the visible evolution from prototype to polished MVP.
-
-
-## 1. Early Prototype (Functional but unpolished)
-> ![Prototype Move List](screenshots/prototype-move-1.jpg)
-
-Issues included:
-
-- Multiple moves per row  
-- Incorrect numbering  
-- No alignment  
-- Minimal styling  
+## Mid-Stage UI Improvements
+![Current UI — Mid Stage](screenshots/current-1.jpg)
 
 ---
 
-## 2. Mid-Development Issues (Debugging Phase)
-> ![Broken Move List](screenshots/mid-broken-1.jpg)
-> ![Another Broken State](screenshots/mid-broken-2.jpg)
+## Final UI in Flutter prototype
+![Current UI](screenshots/current-0.jpg)
 
-These snapshots show:
 
-- Overlapping text  
-- Incorrect grouping  
-- Misaligned rows  
-- Highlight issues  
-- Layout bugs  
-
-Fixes included:
-
-- Rewriting the move list renderer  
-- Turn-based grouping  
-- Grid/Flex layout corrections  
-- Cleaner spacing and padding  
+## Final UI in React (current, after rewrite)
+![Current UI](screenshots/Hero.jpg)
 
 ---
 
-# 🔧 Technical Stack
+# 🔁 Flutter → React Rewrite
 
-**Frontend:** Flutter (Dart)  
-**Backend:** FastAPI (Python)  
-**Engine:** Stockfish (local binary)  
-**AI:** OpenAI API (GPT models)  
-**Deployment:** Vercel (frontend preview), local backend  
-**Tools:** Git, VS Code, Python, Flutter SDK  
+Rewrite advantages:
+
+• Faster Vite builds  
+• Tailwind styling  
+• DOM layout reliability  
+• Eliminated scroll bugs  
+• Clearer separation of backend/frontend  
+• Improved coach endpoint  
 
 ---
 
-# 🛠 Future Improvements
+# 📈 Future Roadmap
 
-- Interpreter-style explanation system  
-- PGN import/export  
-- Evaluation bar  
-- Per-move explanation buttons  
-- Engine depth controls  
-- Dockerized backend  
-- Stronger chess reasoning prompts  
-- Optional cloud deployment (Railway / Fly.io)
+• PGN import/export  
+• Evaluation bar  
+• Engine depth controls  
+• Move-by-move explanations  
+• Counterfactual reasoning  
+• Cloud backend deployment  
+• Docker backend  
 
 ---
 
 # 📄 License
 
-MIT License.
+MIT License
 
 ---
 
@@ -276,13 +198,10 @@ MIT License.
 
 **Christopher Mena**  
 AI/ML Engineer  
-
-**GitHub:** [@ChrisDevAI](https://github.com/ChrisDevAI)  
-**LinkedIn:** [LinkedIn Profile](https://linkedin.com/in/ChrisDevAI)  
-**Website:** [ChrisAI.dev](https://ChrisAI.dev)
+GitHub: https://github.com/ChrisDevAI  
+Website: https://ChrisAI.dev  
+LinkedIn: https://linkedin.com/in/ChrisDevAI
 
 ---
 
-## Notes
-This is an early MVP focused on architecture, integration, and rapid prototyping. Further enhancements will solidify the analysis workflow and interpreter logic.
 
