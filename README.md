@@ -6,6 +6,9 @@ A hybrid AI chess analysis system combining **React + Vite + Tailwind**, **FastA
 
 This MVP demonstrates full-stack engineering, deterministic engine analysis, and natural-language move explanations presented through a custom-built React interface.
 
+**Live Frontend Demo:** https://chess-ai-tutor-react.web.app
+ 
+
 ---
 
 ## 🧠 Project Summary
