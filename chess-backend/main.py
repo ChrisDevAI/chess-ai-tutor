@@ -42,6 +42,7 @@ class AnalyzeRequest(BaseModel):
 class CoachRequest(BaseModel):
     fen: str
     player_color: Optional[str] = "white"
+    question: Optional[str] = ""
 
 class PGNRequest(BaseModel):
     pgn: str
@@ -169,12 +170,54 @@ def analyze_position(req: AnalyzeRequest):
     reply = query_openai(analysis_prompt)
     return {"analysis": reply}
 
+
+def describe_board_from_fen(fen: str) -> str:
+    """
+    Convert a FEN string into a human-readable list of pieces and squares.
+    This anchors the LLM so it cannot hallucinate pieces or threats.
+    """
+    board = chess.Board(fen)
+    piece_map = board.piece_map()
+
+    piece_names = {
+        "p": "pawn",
+        "n": "knight",
+        "b": "bishop",
+        "r": "rook",
+        "q": "queen",
+        "k": "king",
+    }
+
+    white_pieces = []
+    black_pieces = []
+
+    for square, piece in piece_map.items():
+        square_name = chess.square_name(square)
+        symbol = piece.symbol()  # 'P' for white pawn, 'p' for black pawn
+        base = symbol.lower()
+        piece_name = piece_names.get(base, "piece")
+
+        entry = f"{piece_name} on {square_name}"
+
+        if symbol.isupper():
+            white_pieces.append(entry)
+        else:
+            black_pieces.append(entry)
+
+    white_text = "White pieces:\n" + ("\n".join(white_pieces) if white_pieces else "(none)")
+    black_text = "Black pieces:\n" + ("\n".join(black_pieces) if black_pieces else "(none)")
+
+    return white_text + "\n\n" + black_text
+
+
+
 # -------------------------------
-# Coach Explanation (Stockfish + GPT)
+# Coach Explanation (Stockfish + GPT, hallucination-resistant)
 # -------------------------------
 
 @app.post("/coach")
 def coach_player(req: CoachRequest):
+    # 1. Run Stockfish to get best move in UCI
     stockfish_path = "./engines/stockfish/stockfish-windows-x86-64-avx2.exe"
     engine = subprocess.Popen(
         [stockfish_path],
@@ -189,30 +232,72 @@ def coach_player(req: CoachRequest):
     engine.stdin.write("go movetime 500\n")
     engine.stdin.flush()
 
-    best_move = ""
+    best_move_uci = ""
 
     while True:
         output = engine.stdout.readline()
+        if not output:
+            continue
+
+        output = output.strip()
         if output.startswith("bestmove"):
             parts = output.split()
-            best_move = parts[1] if len(parts) > 1 else ""
+            best_move_uci = parts[1] if len(parts) > 1 else ""
             break
-
-
 
     engine.stdin.write("quit\n")
     engine.stdin.flush()
     engine.terminate()
 
-    explanation_prompt = (
-        f"Given this position (FEN): {req.fen}\n"
-        f"The best move for {req.player_color} is: {best_move}\n"
-        "Explain why this is a good move and what plan it supports."
-    )
+    # Convert UCI best move to SAN for readability (if any)
+    best_move_san = ""
+    if best_move_uci:
+        try:
+            best_move_san = uci_to_san(req.fen, best_move_uci)
+        except Exception as e:
+            print("Error converting best move to SAN:", e)
+            best_move_san = best_move_uci  # fallback to UCI string
 
-    explanation = query_openai(explanation_prompt)
+    # 2. Build a human-readable board description
+    board_description = describe_board_from_fen(req.fen)
+
+    # 3. Build the coaching prompt with strict anti-hallucination rules
+    coaching_prompt = f"""
+You are a chess coach.
+
+Here is the exact board position, described in plain English:
+
+{board_description}
+
+Side to move: {req.player_color}
+Stockfish best move (UCI): {best_move_uci}
+Stockfish best move (SAN, if available): {best_move_san}
+
+The player asked this question about the position:
+\"\"\"{req.question}\"\"\"
+
+
+INSTRUCTIONS (CRITICAL):
+
+- Base ALL of your reasoning ONLY on the pieces and squares listed in the board description above.
+- DO NOT invent any extra pieces, pawns, squares, or threats that are not explicitly present there.
+- If a move or threat is not supported by the described position, DO NOT mention it.
+- If the player's question cannot be answered from this position, say so honestly.
+
+COACHING STYLE:
+
+1. Briefly explain the idea behind Stockfish's suggested move for {req.player_color}
+   (using the SAN notation if available).
+
+2. Directly answer the player's QUESTION in the context of THIS exact position.
+   Be concrete: suggest candidate moves, plans, or defensive ideas that fit the board.
+
+3. Keep the explanation clear and practical, suitable for a serious 1300–1700 player.
+"""
+
+    explanation = query_openai(coaching_prompt)
 
     return {
-        "best_move": best_move,
+        "best_move": best_move_san or best_move_uci,
         "explanation": explanation
     }
