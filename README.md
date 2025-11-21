@@ -8,7 +8,7 @@ This MVP demonstrates full-stack engineering, deterministic engine analysis, and
 
 **Live FRONTEND ONLY Demo:** https://chess-ai-tutor-react.web.app
 
-If you want full functionality, run the backend locally.
+If you want full functionality, run locally.
  
 
 ---
