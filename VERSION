@@ -11,4 +11,5 @@ MAJOR — Breaking changes (changes to APIs, core behavior, architecture)
 
 MINOR — Backward-compatible features (new pages, new endpoints, UI changes)
 
+
 PATCH — Bug fixes, polish, small tweaks (typos, color fixes, spacing)
