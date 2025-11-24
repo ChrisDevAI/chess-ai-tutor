@@ -1,4 +1,4 @@
-# Chess AI Tutor
+# Chess AI Tutor    (MVP Release)
 
 ![Hero Screenshot](screenshots/Hero.jpg)
 
@@ -6,7 +6,7 @@ A hybrid AI chess analysis tool that combines AI, deterministic engine evaluatio
 
 ---
 
-## 🔴 Live Demo (Frontend Only)
+## 🔴 Live Demo (Frontend Only) - MVP Release
 https://chess-ai-tutor-react.web.app
 
 > Full functionality requires running the backend locally.
